@@ -21,7 +21,8 @@ case "$ZIP_ARCH" in
     ;;
 esac
 
-DOWNLOAD_URL="https://resource.1panel.pro/v2/stable/v${VERSION}/release/1panel-v${VERSION}-linux-${PANEL_ARCH}.tar.gz"
+# v1 LTS CDN path (v2 has incompatible binary layout - agent/core split)
+DOWNLOAD_URL="https://resource.1panel.pro/stable/v${VERSION}/release/1panel-v${VERSION}-linux-${PANEL_ARCH}.tar.gz"
 curl -fL -o 1panel.tar.gz "$DOWNLOAD_URL"
 
 tar -xzf 1panel.tar.gz

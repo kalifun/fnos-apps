@@ -6,8 +6,10 @@ INPUT_VERSION="${1:-}"
 if [ -n "$INPUT_VERSION" ]; then
   VERSION="$INPUT_VERSION"
 else
-  # 1Panel distributes binaries via their own CDN, not GitHub Releases
-  CDN_VERSION=$(curl -sL "https://resource.1panel.pro/v2/stable/latest" 2>/dev/null)
+  # 1Panel v2.x split the binary into agent + core (incompatible with our build).
+  # Pin to the last v1 LTS until we migrate the launcher/service-setup to v2.
+  # CDN endpoint /stable/latest returns the latest v1 LTS tag (e.g. v1.10.34-lts).
+  CDN_VERSION=$(curl -sL "https://resource.1panel.pro/stable/latest" 2>/dev/null)
   VERSION=$(echo "$CDN_VERSION" | sed 's/^v//')
 fi
 
